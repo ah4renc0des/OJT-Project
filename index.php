@@ -1,164 +1,83 @@
-<?php 
-$user = $conn->query("SELECT * FROM users where id ='".$_settings->userdata('id')."'");
-foreach($user->fetch_array() as $k =>$v){
-	if(!is_numeric($k))
-		$$k = $v;
-}
-?>
-<section class="py-4">
-	<div class="container">
-		<div class="card card-outline rounded-0 card-navy">
-			<div class="card-header">
-				<h4 class="font-weight-bolder">Update User Details</h4>
-			</div>
-			<div class="card-body">
-				<div class="container-fluid">
-					<div id="msg"></div>
-					<form action="" id="manage-user">	
-						<input type="hidden" name="id" value="<?= isset($id) ? $id : '' ?>">
-						<input type="hidden" name="type" value="2">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group">
-									<label for="firstname" class="control-label">First Name</label>
-									<input type="text" class="form-control form-control-sm rounded-0" reqiured="" name="firstname" id="firstname" value="<?= isset($firstname) ? $firstname : "" ?>">
-								</div>
-								<div class="form-group">
-									<label for="middlename" class="control-label">Middle Name</label>
-									<input type="text" class="form-control form-control-sm rounded-0" name="middlename" id="middlename" value="<?= isset($middlename) ? $middlename : "" ?>">
-								</div>
-								<div class="form-group">
-									<label for="lastname" class="control-label">Last Name</label>
-									<input type="text" class="form-control form-control-sm rounded-0" reqiured="" name="lastname" id="lastname" value="<?= isset($lastname) ? $lastname : "" ?>">
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group">
-									<label for="username" class="control-label">Username</label>
-									<input type="text" class="form-control form-control-sm rounded-0" reqiured="" name="username" id="username" value="<?= isset($username) ? $username : "" ?>">
-								</div>
-								<div class="form-group">
-									<label for="password" class="control-label">New Password</label>
-									<div class="input-group input-group-sm">
-										<input type="password" class="form-control form-control-sm rounded-0" name="password" id="password">
-										<button tabindex="-1" class="btn btn-outline-secondary btn-sm rounded-0 pass_view" type="button"><i class="fa fa-eye-slash"></i></button>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="cpassword" class="control-label">Confirm New Password</label>
-									<div class="input-group input-group-sm">
-										<input type="password" class="form-control form-control-sm rounded-0" id="cpassword">
-										<button tabindex="-1" class="btn btn-outline-secondary btn-sm rounded-0 pass_view" type="button"><i class="fa fa-eye-slash"></i></button>
-									</div>
-								</div>
-								<small class="text-muted"><i>Leave the Password Fields Blank if you don't widh to update you password.</i></small>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group">
-									<label for="" class="control-label">Avatar</label>
-									<div class="custom-file">
-										<input type="file" class="custom-file-input rounded-0" id="customFile" name="img" onchange="displayImg(this,$(this))" accept="image/png, image/jpeg">
-										<label class="custom-file-label rounded-0" for="customFile">Choose file</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-								<div class="form-group d-flex justify-content-center">
-									<img src="<?php echo validate_image(isset($avatar) ? $avatar :'') ?>" alt="" id="cimg" class="img-fluid img-thumbnail">
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="card-footer py-1 text-center">
-				<button class="btn btn-sm btn-primary btn-sm btn-flat" form="manage-user">Update</button>
-			</div>
-		</div>
-	</div>
-</section>
 <style>
-	img#cimg{
-		height: 15vh;
-		width: 15vh;
-		object-fit: cover;
-		border-radius: 100% 100%;
-	}
+    #search-field .form-control.rounded-pill{
+        border-top-right-radius:0 !important;
+        border-bottom-right-radius:0 !important;
+        border-right:none !important
+    }
+    #search-field .form-control:focus{
+        box-shadow:none !important;
+    }
+    #search-field .form-control:focus + .input-group-append .input-group-text{
+        border-color: #86b7fe !important
+    }
+    #search-field .input-group-text.rounded-pill{
+        border-top-left-radius:0 !important;
+        border-bottom-left-radius:0 !important;
+        border-right:left !important
+    }
+    .post-item{
+        transition:all .2s ease-in-out;
+    }
+    .post-item:hover{
+        transform:scale(1.02);
+    }
 </style>
+<section class="py-3">
+    <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                <div class="input-group input-group-lg" id="search-field">
+                    <input type="search" class="form-control form-control-lg  rounded-pill" aria-label="Search Post Input" id="search" placeholder="Search post here">
+                    <div class="input-group-append">
+                        <span class="input-group-text rounded-pill bg-transparent"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-1 gx-2 gy-2">
+            <?php 
+            $posts = $conn->query("SELECT p.*, c.name as `category` FROM `post_list` p inner join category_list c on p.category_id = c.id where p.user_id = '{$_settings->userdata('id')}' and p.`delete_flag` = 0 order by abs(unix_timestamp(p.date_created)) desc");
+            while($row = $posts->fetch_assoc()):
+            ?>
+            <div class="col post-item">
+                <a href="./?p=posts/view_post&id=<?= $row['id'] ?>" class="card rounded-0 shadow text-decoration-none text-reset">
+                    <div class="card-body">
+                        <div class="mb-2 text-right">
+                            <small class="badge badge-light border text-dark rounded-pill px-3"><i class="far fa-circle"></i> <?= $row['category'] ?></small>
+                            <?php if($row['status'] == 1): ?>
+                                <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Published</small>
+                            <?php else: ?>
+                                <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Unpublished</small>
+                            <?php endif; ?>
+                        </div>
+                        <h3 class="card-title w-100 font-weight-bold"><?= $row['title'] ?></h3>
+                        <div class="card-text truncate-3 text-muted text-sm"><?= strip_tags($row['content']) ?></div>
+                        <div class="mb-2 text-right">
+                            <small class="text-muted"><i><?= date("Y-m-d h:i A", strtotime($row['date_created'])) ?></i></small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <?php endwhile; ?>
+        </div>
+        <?php if($posts->num_rows <= 0): ?>
+            <h4 class="text-muted text-center"><i>You don't have post records yet</i></h4>
+        <?php endif; ?>
+    </div>
+</section>
 <script>
-	function displayImg(input,_this) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-	        	$('#cimg').attr('src', e.target.result);
-	        }
-
-	        reader.readAsDataURL(input.files[0]);
-	    }else{
-			$('#cimg').attr('src', "<?php echo validate_image(isset($avatar) ? $avatar :'') ?>");
-		}
-	}
-	$(function(){
-		$('.pass_view').click(function(){
-			var input = $(this).siblings('input')
-			var type = input.attr('type')
-			if(type == 'password'){
-				$(this).html('<i class="fa fa-eye"></i>')
-				input.attr('type','text').focus()
-			}else{
-				$(this).html('<i class="fa fa-eye-slash"></i>')
-				input.attr('type','password').focus()
-			}
-		})
-		$('#manage-user').submit(function(e){
-			e.preventDefault()
-			var _this = $(this)
-			var el = $('<div>')
-				el.addClass('alert alert-danger err_msg')
-				el.hide()
-			$('.err_msg').remove()
-			if($('#password').val() != $('#cpassword').val()){
-				el.text('Password does not match')
-				_this.prepend(el)
-				el.show('slow')
-				$('html, body').scrollTop(0)
-				return false;
-			}
-			if(_this[0].checkValidity() == false){
-				_this[0].reportValidity();
-				return false;
-			}
-			start_loader()
-			$.ajax({
-				url:_base_url_+"classes/Users.php?f=registration",
-				method:'POST',
-				type:'POST',
-				data:new FormData($(this)[0]),
-				dataType:'json',
-				cache:false,
-				processData:false,
-				contentType: false,
-				error:err=>{
-					console.log(err)
-					alert('An error occurred')
-					end_loader()
-				},
-				success:function(resp){
-					if(resp.status == 'success'){
-					location.reload()
-					}else if(!!resp.msg){
-						el.html(resp.msg)
-						el.show('slow')
-						_this.prepend(el)
-						$('html, body').scrollTop(0)
-					}else{
-						alert('An error occurred')
-						console.log(resp)
-					}
-					end_loader()
-				}
-			})
-		})
-	})
-
+    $(function(){
+        $('#search').on('input', function(){
+            var _search = $(this).val().toLowerCase()
+            $('.post-item').each(function(){
+                var _text = $(this).text().toLowerCase()
+                _text = _text.trim()
+                if(_text.includes(_search) === false){
+                    $(this).toggle(false)
+                }else{
+                    $(this).toggle(true)
+                }
+            })
+        })
+    })
 </script>
