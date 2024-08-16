@@ -128,6 +128,7 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="./">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="./?p=categories">Topic Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="./?p=about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./?p=wellness">Wellness</a></li>
                     <?php if($_settings->userdata('id') != '' && $_settings->userdata('type') == 2): ?>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="./?p=posts">My Posts</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="./?p=posts/manage_post"><i class="far fa-plus-square"></i> Add Post</a></li>
