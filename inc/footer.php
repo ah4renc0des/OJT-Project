@@ -61,10 +61,29 @@
 <!-- Footer-->
 <footer class="py-5 bg-gradient-navy">
             <div class="container">
-              <p class="m-0 text-center text-white">Copyright &copy; <?php echo $_settings->info('short_name') ?> 2021</p>
-              <p class="m-0 text-center text-white">Developed By: <a href="mailto:oretnom23@gmail.com">oretnom23</a></p>
+              <p class="m-0 text-center text-white">Copyright &copy; <?php echo $_settings->info('short_name') ?> 2024</p>
+              <p class="m-0 text-center text-white">Developed By: RWFEP Devs :)</a></p>
           </div>
         </footer>
+        <script>
+        // JavaScript to keep the footer at the bottom
+        function adjustFooterPosition() {
+          const bodyHeight = document.body.offsetHeight;
+          const windowHeight = window.innerHeight;
+          const footer = document.querySelector('footer');
+          // Check if the content height is less than the window height
+          if (bodyHeight < windowHeight) {
+            // Set margin-top to push the footer down
+            const marginTop = windowHeight - bodyHeight;
+            footer.style.marginTop = marginTop + 'px';
+          } else {
+            footer.style.marginTop = '0'; // Reset margin if content overflows
+          }
+        }
+        // Adjust footer position on page load and resize
+        window.addEventListener('load', adjustFooterPosition);
+        window.addEventListener('resize', adjustFooterPosition);
+        </script>
 
    
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -122,3 +141,32 @@
       <div class="drp-buttons"><span class="drp-selected"></span><button class="cancelBtn btn btn-sm btn-default" type="button">Cancel</button><button class="applyBtn btn btn-sm btn-primary" disabled="disabled" type="button">Apply</button> </div>
     </div>
     <div class="jqvmap-label" style="display: none; left: 1093.83px; top: 394.361px;">Idaho</div>
+
+    <!--chatbot-->
+    <script src="admin/chatbot/script.js" defer></script>
+    <link rel="stylesheet" href="admin/chatbot/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <!--chatbot function-->
+    <div class="chatbot-container">
+    <button class="chatbot-toggler">
+      <span class="material-symbols-rounded">mode_comment</span>
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="chatbot">
+      <header>
+        <h2>Chatbot</h2>
+        <span class="close-btn material-symbols-outlined">close</span>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <p>Hi there 👋<br>How can I help you today?</p>
+        </li>
+      </ul>
+      <div class="chat-input">
+        <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+        <span id="send-btn" class="material-symbols-rounded">send</span>
+      </div>
+    </div>
+  </div>
