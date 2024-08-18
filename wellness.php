@@ -79,6 +79,7 @@
             height: 250px; /* Fixed height */
             margin: auto; /* Center the card within its column */
         }
+        
 
         .card-body {
             padding: 20px; /* Increased padding inside the card */
@@ -97,12 +98,46 @@
             text-overflow: ellipsis; /* Add ellipsis for overflowing text */
         }
 
+        .cardwellness {
+            border: none;
+            border-radius: 10px; /* Rounded corners for a modern look */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto; /* Ensures content doesn't overflow */
+            display: flex;
+            width: 1200px; /* Fixed width */
+            height: 400px; /* Fixed height */
+            margin: auto; /* Center the card within its column */
+        }
+
+        .cardwellness-body {
+            padding: 20px; /* Increased padding inside the card */
+            flex: 1; /* Ensure card body takes up available space */
+            overflow: auto; /* Ensure content fits within fixed size */
+        }
+
+        .cardpdf {
+            border: none;
+            border-radius: 10px; /* Rounded corners for a modern look */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: auto; /* Ensures content doesn't overflow */
+            display: flex;
+            width: 1200px; /* Fixed width */
+            height: 430px; /* Fixed height */
+            margin: auto; /* Center the card within its column */
+        }
+
+        .cardpdf-body {
+            padding: 20px; /* Increased padding inside the card */
+            flex: 1; /* Ensure card body takes up available space */
+            overflow: auto; /* Ensure content fits within fixed size */
+        }
+
         .text-muted {
             color: #6c757d !important;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
         }
 
         /* Adjust column sizes */
@@ -118,6 +153,17 @@
 <body>
     <section class="py-3">
         <div class="container">
+            <div class="cardwellness rounded-0">
+                <div class="cardwellness-body">
+                    <?php include "wellness-about.html" ?>
+                </div>
+            </div>
+            <div>
+                <?php include "wellness-pdf.html" ?>
+            </div>
+            <div>
+                <?php include "wellness-vid.html" ?>
+            </div>
             <div class="row justify-content-center my-4">
                 <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
                     <div class="input-group input-group-lg" id="search-field">

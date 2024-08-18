@@ -120,7 +120,7 @@
             </button>
             <a class="navbar-brand" href="./">
                 <img src="<?php echo validate_image($_settings->info('logo')) ?>" alt="Logo" loading="lazy">
-                <?php echo $_settings->info('short_name') ?>
+                <html> VirtuaLink </html>
             </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -129,6 +129,7 @@
                     <li class="nav-item"><a class="nav-link" href="./?p=categories">Topic Categories</a></li>
                     <li class="nav-item"><a class="nav-link" href="./?p=about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="./?p=wellness">Wellness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./?p=events">Events</a></li>
                     <?php if($_settings->userdata('id') != '' && $_settings->userdata('type') == 2): ?>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="./?p=posts">My Posts</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="./?p=posts/manage_post"><i class="far fa-plus-square"></i> Add Post</a></li>

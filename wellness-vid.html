@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Montserrat:wght@400&display=swap');
+        
+        /* Container styles */
+        .video-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+        .video-column {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Ensure content is vertically centered */
+            align-items: center; /* Ensure content is horizontally centered */
+        }
+
+        .video-column h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .video-column p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .video-column iframe {
+            margin-bottom: 15px;
+        }
+
+        .video-column a {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+        .video-column a:hover {
+            color: #0056b3;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .video-section {
+                flex-direction: column;
+            }
+
+            .video-column {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="video-section">
+        <!-- Column for Video 1 -->
+        <div class="video-column">
+            <h2>Mental Health Plans</h2>
+            <p>Workplace Wellbeing Day and the Year Ahead</p>
+            <iframe width="300" height="169" src="https://www.youtube.com/embed/xh3wy6DEKW8" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+            <a href="https://www.youtube.com/watch?v=xh3wy6DEKW8" target="_blank">Check out here!</a>
+        </div>
+        <!-- Column for Video 2 -->
+        <div class="video-column">
+            <h2>Workplace Wellness</h2>
+            <p>Programs and Interventions</p>
+            <iframe width="300" height="169" src="https://www.youtube.com/embed/MZtRRMVGSng" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+            <a href="https://www.youtube.com/watch?v=MZtRRMVGSng" target="_blank">Check out here!</a>
+        </div>
+        <!-- Column for Video 3 -->
+        <div class="video-column">
+            <h2>Top 4 Wellness Programs</h2>
+            <p>Programs Examples</p>
+            <iframe width="300" height="169" src="https://www.youtube.com/embed/FDnDYnwYydA" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+            <a href="https://www.youtube.com/watch?v=FDnDYnwYydA" target="_blank">Check out here!</a>
+        </div>
+    </section>
+</body>
+</html>
