@@ -12,7 +12,6 @@ if(isset($_GET['id'])){
     }
 }else{
     echo '<script> alert("Post ID is required"; location.replace("./p=posts");</script>';
-
 }
 ?>
 <style>

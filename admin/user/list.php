@@ -29,6 +29,8 @@
 					<col width="15%">
 					<col width="10%">
 					<col width="15%">
+					<col width="20%"> <!-- Column for Achievements -->
+					<col width="10%"> <!-- Column for Commend User -->
 				</colgroup>
 				<thead>
 					<tr>
@@ -38,13 +40,21 @@
 						<th>Name</th>
 						<th>Username</th>
 						<th>Type</th>
+						<th>Achievements</th> <!-- Added header for Achievements -->
+						<th>Commend User</th> <!-- Added header for Commend User -->
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT *, concat(firstname,' ', coalesce(concat(middlename,' '), '') , lastname) as `name` from `users` where id != '{$_settings->userdata('id')}' order by concat(firstname,' ', lastname) asc ");
+						$qry = $conn->query("SELECT *, 
+                                              concat(firstname,' ', coalesce(concat(middlename,' '), '') , lastname) as `name`,
+                                              achievements, 
+                                              commend 
+                                              from `users` 
+                                              where id != '{$_settings->userdata('id')}' 
+                                              order by concat(firstname,' ', lastname) asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
@@ -64,16 +74,20 @@
 									N/A
                                 <?php endif; ?>
                             </td>
+							<td><?php echo htmlspecialchars($row['achievements']) ?></td> <!-- Display Achievements -->
+							<td class="text-center">
+                                <?php echo $row['commend'] == 1 ? 'Yes' : 'No'; ?> <!-- Display Commend User -->
+                            </td>
 							<td align="center">
-								 <button type="button" class="btn btn-flat p-1 btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
-				                  		Action
-				                    <span class="sr-only">Toggle Dropdown</span>
-				                  </button>
-				                  <div class="dropdown-menu" role="menu">
-				                    <a class="dropdown-item" href="./?page=user/manage_user&id=<?= $row['id'] ?>"><span class="fa fa-edit text-dark"></span> Edit</a>
-				                    <div class="dropdown-divider"></div>
-				                    <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
-				                  </div>
+								<button type="button" class="btn btn-flat p-1 btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                  	Action
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" href="./?page=user/manage_user&id=<?= $row['id'] ?>"><span class="fa fa-edit text-dark"></span> Edit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
+                                </div>
 							</td>
 						</tr>
 					<?php endwhile; ?>
@@ -89,7 +103,7 @@
 		})
 		$('.table').dataTable({
 			columnDefs: [
-					{ orderable: false, targets: [6] }
+					{ orderable: false, targets: [8] } // Adjust the column index if necessary
 			],
 			order:[0,'asc']
 		});
@@ -103,14 +117,14 @@
 			data:{id: $id},
 			error:err=>{
 				console.log(err)
-				alert_toast("An error occured.",'error');
+				alert_toast("An error occurred.",'error');
 				end_loader();
 			},
 			success:function(resp){
 				if(resp == 1){
 					location.reload();
 				}else{
-					alert_toast("An error occured.",'error');
+					alert_toast("An error occurred.",'error');
 					end_loader();
 				}
 			}

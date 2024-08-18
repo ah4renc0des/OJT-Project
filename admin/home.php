@@ -74,7 +74,25 @@
       </div>
       <!-- /.info-box -->
     </div>
-  </div>
+    <!-- /.col -->
+    <!-- New info-box for Survey Feedback -->
+    <div class="col-12 col-sm-3 col-md-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-gradient-info elevation-1"><i class="fas fa-comments"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Survey Feedback</span>
+                <span class="info-box-number">
+                    <?php 
+                        $feedback = $conn->query("SELECT * FROM surveyfeedback")->num_rows;
+                        echo format_num($feedback);
+                    ?>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+</div>
 <div class="container">
   <?php 
     $files = array();

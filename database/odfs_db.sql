@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2024 at 11:55 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Aug 18, 2024 at 06:37 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -107,6 +107,28 @@ INSERT INTO `post_list` (`id`, `user_id`, `category_id`, `title`, `content`, `st
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `surveyfeedback`
+--
+
+CREATE TABLE `surveyfeedback` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `feedback` mediumtext NOT NULL,
+  `date created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `surveyfeedback`
+--
+
+INSERT INTO `surveyfeedback` (`id`, `name`, `email`, `feedback`, `date created`) VALUES
+(6, 'Ror', 'Ror@gmail.com', 'Ror', '2024-08-18 22:23:54'),
+(7, 'Herta', 'herta@kuru.kuru', 'It\'s fine.', '2024-08-18 22:43:03');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `system_info`
 --
 
@@ -145,18 +167,19 @@ CREATE TABLE `users` (
   `type` tinyint(1) NOT NULL DEFAULT 0,
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `achievements` text NOT NULL
+  `achievements` text NOT NULL,
+  `commend` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='2';
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `avatar`, `last_login`, `type`, `date_added`, `date_updated`, `achievements`) VALUES
-(1, 'Adminstrator', '', 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatars/1.png?v=1649834664', NULL, 1, '2021-01-20 14:02:37', '2022-05-16 14:17:49', ''),
-(4, 'Mark', 'D', 'Cooper', 'mcooper', 'c7162ff89c647f444fcaa5c635dac8c3', 'uploads/avatars/4.png?v=1652667135', NULL, 2, '2022-05-16 10:12:15', '2022-05-16 13:44:49', ''),
-(5, 'John', 'D', 'Smith', 'jsmith', '1254737c076cf867dc53d60a0364f38e', NULL, NULL, 2, '2022-05-16 14:19:03', '2022-05-16 14:19:03', ''),
-(6, 'Miranda', 'Lana', 'Priestly', 'mirprinck', '436516b29b49e0354be9e9ddbe7ccdc5', NULL, NULL, 2, '2024-08-16 20:22:23', '2024-08-16 20:22:23', '');
+INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `avatar`, `last_login`, `type`, `date_added`, `date_updated`, `achievements`, `commend`) VALUES
+(1, 'Adminstrator', '', 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatars/1.png?v=1649834664', NULL, 1, '2021-01-20 14:02:37', '2022-05-16 14:17:49', '', 0),
+(4, 'Mark', 'D', 'Cooper', 'mcooper', 'c7162ff89c647f444fcaa5c635dac8c3', 'uploads/avatars/4.png?v=1652667135', NULL, 2, '2022-05-16 10:12:15', '2024-08-19 00:33:14', 'Finished OJT!', 1),
+(5, 'John', 'D', 'Smith', 'jsmith', '1254737c076cf867dc53d60a0364f38e', NULL, NULL, 2, '2022-05-16 14:19:03', '2022-05-16 14:19:03', '', 0),
+(6, 'Miranda', 'Lana', 'Priestly', 'mirprinck', '436516b29b49e0354be9e9ddbe7ccdc5', NULL, NULL, 2, '2024-08-16 20:22:23', '2024-08-19 00:03:14', 'Finished AI Storybook', 1);
 
 --
 -- Indexes for dumped tables
@@ -183,6 +206,12 @@ ALTER TABLE `post_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `surveyfeedback`
+--
+ALTER TABLE `surveyfeedback`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `system_info`
@@ -217,6 +246,12 @@ ALTER TABLE `comment_list`
 --
 ALTER TABLE `post_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `surveyfeedback`
+--
+ALTER TABLE `surveyfeedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `system_info`

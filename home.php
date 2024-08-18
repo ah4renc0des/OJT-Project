@@ -122,6 +122,7 @@
             padding: 50px; /* Padding around each column */
         }
     </style>
+    <link rel="stylesheet" href="survey/style.css">
 </head>
 <body>
     <section class="py-3">
@@ -213,5 +214,17 @@
         });
     </script>
   </div>
+  <div class="popup-box" id="hid" style="display: block; visibility: hidden">
+    <div class="transparent-layer" onclick="closePopup()"></div>
+    <div class="popup-inner">
+        <!-- Close button -->
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+
+        <div class="popup-msg">Have a few minutes? Take a feedback survey!</div>
+
+        <button class="next-step-btn" onclick="location.href = 'survey/survey.php'">Continue</button>
+    </div>
+    </div>
+    <script src="survey/surveypop.js"></script>
 </body>
 </html>

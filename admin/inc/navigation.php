@@ -121,6 +121,12 @@
                         <p><b>Posts</b></p>
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a href="./?page=survey" class="nav-link nav-survey">
+                        <i class="nav-icon fas fa-survey"></i>
+                        <p><b>Survey Feedbacks</b></p>
+                    </a>
+                </li>
                 <?php if($_settings->userdata('type') == 1): ?>
                 <li class="nav-header"><b>Maintenance</b></li>
                 <li class="nav-item dropdown">
