@@ -188,7 +188,7 @@
           },
           success: function (resp) {
             if (resp.status == 'success') {
-              location.href = ('./login.php')
+              location.href = ('login.php')
             } else if (!!resp.msg) {
               el.html(resp.msg)
               el.show('slow')
