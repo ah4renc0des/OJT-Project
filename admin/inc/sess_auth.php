@@ -9,10 +9,10 @@ else
 $link .= "://"; 
 $link .= $_SERVER['HTTP_HOST']; 
 $link .= $_SERVER['REQUEST_URI'];
-if(!isset($_SESSION['userdata']) && !strpos($link, 'login.php')){
+if(!isset($_SESSION['userdata']) && !strpos($link, 'login.php') && $_settings->userdata('type') == 2){
 	redirect('admin/login.php');
 }
-if(isset($_SESSION['userdata']) && strpos($link, 'login.php')){
+if(isset($_SESSION['userdata']) && strpos($link, 'login.php') && $_settings->userdata('type') == 1){
 	redirect('admin/index.php');
 }
 $module = array('','admin','faculty','student');

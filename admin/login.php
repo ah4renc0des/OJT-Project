@@ -1,8 +1,8 @@
 <?php require_once('../config.php'); ?>
-<?php require_once('inc/sess_auth.php'); ?>
+<?php require_once('admin/inc/sess_auth.php'); ?>
 <!DOCTYPE html>
 <html lang="en" style="height: auto;">
- <?php require_once('inc/header.php'); ?>
+ <?php require_once('admin/inc/header.php'); ?>
 <body class="hold-transition login-page">
   <script>
     start_loader();
